@@ -44,7 +44,7 @@ public class CardGame {
         String drawnCard = drawCard();
         playerHand.add(drawnCard);
 
-        return "New game started. Initial card: " + drawnCard;
+        return "New game started. Balance: " + balance + ". Initial card: " + drawnCard;
     }
 
     public String shuffleGame() {
@@ -59,7 +59,7 @@ public class CardGame {
         String drawnCard = drawCard();
         playerHand.add(drawnCard);
 
-        return "Deck shuffled. Drawn card: " + drawnCard;
+        return "Deck shuffled. Balance: " + balance + ". Drawn card: " + drawnCard;
     }
 
     public String placeBet(int betAmount, String betType) {
@@ -68,7 +68,7 @@ public class CardGame {
         }
 
         if (balance < betAmount) {
-            return "Insufficient balance to make the bet.";
+            return "Insufficient balance to make the bet. Balance: " + balance;
         }
 
         if (!betType.equals("higher") && !betType.equals("lower")){
