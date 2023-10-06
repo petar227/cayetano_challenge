@@ -8,7 +8,7 @@ public class CardGame {
     public CardGame() {
         initializeDeck();
         shuffleDeck();
-        balance = 0;
+        balance = -1;
         playerHand = new ArrayList<>();
     }
 
@@ -31,15 +31,16 @@ public class CardGame {
     }
 
     public String startGame(int initialBalance) {
-        if (balance > 0) {
-            return "Game already started. Use '/shuffle' to restart the deck.";
-        }
 
         if (initialBalance <= 0) {
             return "Starting balance must be greater than 0.";
         }
 
+        initializeDeck();
+        shuffleDeck();
+
         balance = initialBalance;
+        playerHand.clear();
         String drawnCard = drawCard();
         playerHand.add(drawnCard);
 
@@ -47,8 +48,8 @@ public class CardGame {
     }
 
     public String shuffleGame() {
-        if (balance <= 0) {
-            return "Game has not been started yet.";
+        if (balance < 0) {
+            return "Game has not been started yet. Deposit a balance to start the game.";
         }
 
         initializeDeck();
@@ -62,7 +63,7 @@ public class CardGame {
     }
 
     public String placeBet(int betAmount, String betType) {
-        if (balance <= 0) {
+        if (balance < 0) {
             return "Game not started yet.";
         }
 
